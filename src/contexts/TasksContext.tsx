@@ -72,13 +72,12 @@ async function updateTask(id: string, patch: Partial<Task>) {
 
 async function removeTask(id: string) {
     const prev = tasks;
-    const deletedId = id.toString();
     setTasks(tasks.filter(t => t.id !== id));
     try {
-        await api.delete(`/Tasks/deleteTask?id=${deletedId}`)
+        await api.delete(`/Tasks/deleteTask?id=${id}`)
         refresh();
     } catch(error) {
-        console.error('Error deleting item:', error);
+        console.error('Error deleting task:', error);
         setTasks(prev)
     }
 }
